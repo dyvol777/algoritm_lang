@@ -1,0 +1,5 @@
+﻿  lab 3-4.cpp
+c:\users\sergey\documents\visual studio 2015\projects\lab 3-4\lab 3-4\lab 3-4.cpp(5): warning C4603: WIN32_LEAN_AND_MEAN: макрос не определен или определение изменилось после использования предкомпилированного заголовка
+  c:\users\sergey\documents\visual studio 2015\projects\lab 3-4\lab 3-4\lab 3-4.cpp(5): note: Добавление макроопределения в предкомпилированный заголовок вместо определения его здесь
+  c:\users\sergey\documents\visual studio 2015\projects\lab 3-4\lab 3-4\lab 3-4.cpp(6): note: использование предварительно скомпилированного заголовка
+  lab 3-4.vcxproj -> C:\Users\Sergey\Documents\Visual Studio 2015\Projects\lab 3-4\Debug\lab 3-4.exe
