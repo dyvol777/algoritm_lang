@@ -4,10 +4,15 @@
 #pragma once
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 #include "stdafx.h"
+#include "stdio.h"
 #include <tchar.h>
 #include <string>
 #include <stdlib.h>
 #include <iostream>
+#include <sstream>
+#include <iomanip>
+#include <conio.h>
+#include <time.h>
 using namespace std;
 
 const int modul = 1000;
@@ -23,7 +28,8 @@ public:
 	}
 	friend element operator+(const element& s1, const element& s2);
 	friend element operator*(const element& s1, const element& s2);
-	
+	friend ostream& operator << (ostream& out, element const& a);
+	friend istream& operator >> (istream& in, element& a);
 };
 
 element operator+(const element& s1, const element& s2)
@@ -32,12 +38,25 @@ element operator+(const element& s1, const element& s2)
 	element a(q);
 	return a;
 }
-
 element operator*(const element& s1, const element& s2)
 {
 	int q = s1.data * s2.data;
 	element a(q);
 	return a;
+}
+ostream& operator << (ostream& out, element const& a)
+{
+	out << "zn " << a.data;
+	return out;
+}
+istream& operator >> (istream& in, element& a)
+{
+	string el;
+	in >> el;
+	stringstream ss;
+	ss << el;
+	ss >> a.data;
+	return in;
 }
 
 class matrix
@@ -99,7 +118,7 @@ public:
 				{
 					q.a[i][j] = a[i][j];
 				}
-				else q.a[i][j] = s.a[i][j];
+				else q.a[i][j] = s.a[i][j-stolbcu];
 			}
 		}
 		return q;
@@ -118,29 +137,43 @@ public:
 	}
 	~matrix()
 	{
-
+		for (int i = 0;i < stolbcu; i++)
+		{
+			delete []a[i];
+		}
+		delete []a;
 	}
+	friend ostream& operator << (ostream& out, matrix const& a);
+	friend istream& operator >> (istream& in, matrix& a);
 };
 
-//ostream& operator<<(ostream& ost, Rational const& rat)
-//{
-//	return ost << "[" << rat.num << '/' << rat.den << "]";
-//}
-//
-//istream& operator>>(istream& ist, Rational& r)
-//{
-//	string rational;
-//	ist >> rational;
-//	auto d = find(rational.begin(), rational.end(), '/');
-//	if (rational.front() != '[' || rational.back() != ']' || d == rational.end())
-//		throw runtime_error("Bad input");
-//	*d = ' ';
-//	string tmp(rational.begin() + 1, --(rational.end()));
-//	stringstream ss;
-//	ss << tmp;
-//	ss >> r.num >> r.den;
-//	return ist;
-//}
+ostream& operator << (ostream& out, matrix const& a)
+{
+	for (int i = 0;i < a.stroki; i++)
+	{
+		for (int j = 0;j < a.stolbcu; j++)
+		{
+			out << setw(4) << a.a[i][j];
+		}
+		out << endl;
+	}
+	return out;
+}
+istream& operator >> (istream& in, matrix& a)
+{
+	string el;
+	in >> el;
+	stringstream ss;
+	ss << el;	
+	for (int i = 0;i < a.stroki; i++)
+	{
+		for (int j = 0;j < a.stolbcu; j++)
+		{
+			ss >> a.a[i][j];
+		}
+	}
+	return in;
+}
 
 int main()
 {

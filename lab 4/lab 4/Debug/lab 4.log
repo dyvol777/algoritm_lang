@@ -1,6 +1,5 @@
-﻿  stdafx.cpp
-  lab 4.cpp
+﻿  lab 4.cpp
 c:\users\sergey\documents\visual studio 2015\projects\lab 4\lab 4\lab 4.cpp(5): warning C4603: WIN32_LEAN_AND_MEAN: макрос не определен или определение изменилось после использования предкомпилированного заголовка
   c:\users\sergey\documents\visual studio 2015\projects\lab 4\lab 4\lab 4.cpp(5): note: Добавление макроопределения в предкомпилированный заголовок вместо определения его здесь
   c:\users\sergey\documents\visual studio 2015\projects\lab 4\lab 4\lab 4.cpp(6): note: использование предварительно скомпилированного заголовка
-  lab 4.vcxproj -> c:\users\sergey\documents\visual studio 2015\Projects\lab 4\Debug\lab 4.exe
+  lab 4.vcxproj -> C:\Users\Sergey\documents\visual studio 2015\Projects\lab 4\Debug\lab 4.exe
