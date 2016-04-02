@@ -15,7 +15,7 @@
 #include <time.h>
 using namespace std;
 
-const int modul = 1000;
+const int modul = 100;
 
 class element
 {
@@ -46,7 +46,7 @@ element operator*(const element& s1, const element& s2)
 }
 ostream& operator << (ostream& out, element const& a)
 {
-	out << "zn " << a.data;
+	out << a.data;
 	return out;
 }
 istream& operator >> (istream& in, element& a)
@@ -123,26 +123,27 @@ public:
 		}
 		return q;
 	}
-	matrix povorot(const matrix& s)
+	matrix povorot(void)
 	{
-		matrix q(0, s.stolbcu, s.stroki);
-		for (int i = 0; i<s.stroki;i++)
+		matrix q(0, stolbcu, stroki);
+		for (int i = 0; i<stroki;i++)
 		{
-			for (int j = 0; j < s.stolbcu;j++)
+			for (int j = 0; j < stolbcu;j++)
 			{
-				q.a[j][s.stolbcu - 1 - i] = s.a[i][j];
+				q.a[j][stolbcu - 1 - i] = a[i][j];
 			}
 		}
+		cout << q;
 		return q;
 	}
-	~matrix()
+	/*~matrix()
 	{
 		for (int i = 0;i < stolbcu; i++)
 		{
 			delete []a[i];
 		}
 		delete []a;
-	}
+	}*/
 	friend ostream& operator << (ostream& out, matrix const& a);
 	friend istream& operator >> (istream& in, matrix& a);
 };
@@ -177,6 +178,30 @@ istream& operator >> (istream& in, matrix& a)
 
 int main()
 {
+	srand(time(NULL));
+	element** a;
+	a = new element*[5];
+	for (int i = 0;i < 5; i++)
+	{
+		a[i] = new element[5];
+	}
+	for (int i = 0;i < 5; i++)
+	{
+		for (int j = 0;j < 5; j++)
+		{
+				a[i][j] = rand();
+		}
+	}
+	matrix b(a, 5, 5);
+	cout << "prost" << endl << b;
+	b = b + b;
+	cout << "plus" << endl << b;
+	b = b | b;
+	cout << "prisoed" << endl << b;
+	matrix c(0, 10, 5);
+	cout << "povorot vn" << endl;
+	b.povorot();
+	system("pause");
     return 0;
 }
 
