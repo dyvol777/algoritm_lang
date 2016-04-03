@@ -65,7 +65,7 @@ protected:
 	element** a;
 	int stroki, stolbcu;
 public:
-	matrix(element** dv, int s1, int s2)
+	matrix(int s1, int s2, element** dv = 0)
 	{
 		a = new element*[s1];
 		for (int i = 0;i < s1; i++)
@@ -97,7 +97,7 @@ public:
 	}
 	matrix operator+(const matrix& s)
 	{
-		matrix q(0,stroki, stolbcu);
+		matrix q(stroki, stolbcu);
 		for (int i = 0;i < stroki; i++)
 		{
 			for (int j = 0;j < stolbcu; j++)
@@ -109,7 +109,7 @@ public:
 	}
 	matrix operator|(const matrix& s)
 	{
-		matrix q(0, stroki, (stolbcu+s.stolbcu));
+		matrix q(stroki, (stolbcu+s.stolbcu));
 		for (int i = 0;i < stroki; i++)
 		{
 			for (int j = 0;j < (stolbcu + s.stolbcu); j++)
@@ -125,15 +125,14 @@ public:
 	}
 	matrix povorot(void)
 	{
-		matrix q(0, stolbcu, stroki);
+		matrix q(stolbcu, stroki);
 		for (int i = 0; i<stroki;i++)
 		{
 			for (int j = 0; j < stolbcu;j++)
 			{
-				q.a[j][stolbcu - 1 - i] = a[i][j];
+				q.a[j][stroki-1-i] = a[i][j];
 			}
 		}
-		cout << q;
 		return q;
 	}
 	/*~matrix()
@@ -163,13 +162,16 @@ ostream& operator << (ostream& out, matrix const& a)
 istream& operator >> (istream& in, matrix& a)
 {
 	string el;
-	in >> el;
-	stringstream ss;
-	ss << el;	
+	//in >> el;
+	//stringstream ss;
+	//ss << el;	
 	for (int i = 0;i < a.stroki; i++)
 	{
 		for (int j = 0;j < a.stolbcu; j++)
 		{
+			in >> el;
+			stringstream ss;
+			ss << el;
 			ss >> a.a[i][j];
 		}
 	}
@@ -192,15 +194,18 @@ int main()
 				a[i][j] = rand();
 		}
 	}
-	matrix b(a, 5, 5);
+	matrix b(5, 5, a);
 	cout << "prost" << endl << b;
 	b = b + b;
 	cout << "plus" << endl << b;
 	b = b | b;
 	cout << "prisoed" << endl << b;
-	matrix c(0, 10, 5);
-	cout << "povorot vn" << endl;
-	b.povorot();
+	b = b.povorot();
+	cout << "povorot" << endl << b;
+	cout << "enter new matrix" << endl;
+	matrix c(3, 3);
+	cin >> c;
+	cout << "c" << endl << c;
 	system("pause");
     return 0;
 }

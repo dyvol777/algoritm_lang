@@ -2,5 +2,5 @@
 c:\users\sergey\documents\visual studio 2015\projects\lab 4\lab 4\lab 4.cpp(5): warning C4603: WIN32_LEAN_AND_MEAN: макрос не определен или определение изменилось после использования предкомпилированного заголовка
   c:\users\sergey\documents\visual studio 2015\projects\lab 4\lab 4\lab 4.cpp(5): note: Добавление макроопределения в предкомпилированный заголовок вместо определения его здесь
   c:\users\sergey\documents\visual studio 2015\projects\lab 4\lab 4\lab 4.cpp(6): note: использование предварительно скомпилированного заголовка
-c:\users\sergey\documents\visual studio 2015\projects\lab 4\lab 4\lab 4.cpp(181): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-  lab 4.vcxproj -> C:\Users\Sergey\documents\visual studio 2015\Projects\lab 4\Debug\lab 4.exe
+c:\users\sergey\documents\visual studio 2015\projects\lab 4\lab 4\lab 4.cpp(183): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  lab 4.vcxproj -> C:\Users\Sergey\Documents\Visual Studio 2015\Projects\lab 4\Debug\lab 4.exe
