@@ -1,18 +1,10 @@
 // lab 4.cpp: определяет точку входа для консольного приложения.
 //
 
-#pragma once
+
 #define WIN32_LEAN_AND_MEAN		// Exclude rarely-used stuff from Windows headers
 #include "stdafx.h"
-#include "stdio.h"
-#include <tchar.h>
-#include <string>
-#include <stdlib.h>
-#include <iostream>
-#include <sstream>
-#include <iomanip>
-#include <conio.h>
-#include <time.h>
+
 using namespace std;
 
 const int modul = 100;
@@ -88,6 +80,7 @@ public:
 	}
 	element poluch(int c, int b)
 	{
+
 		return a[c][b];
 	}
 	void vstav(int c, int b, element d)
@@ -97,6 +90,8 @@ public:
 	}
 	matrix operator+(const matrix& s)
 	{
+		if ((stolbcu != s.stolbcu) || (stroki != s.stroki))
+		throw "ne ravn razmer";
 		matrix q(stroki, stolbcu);
 		for (int i = 0;i < stroki; i++)
 		{
@@ -181,6 +176,9 @@ istream& operator >> (istream& in, matrix& a)
 int main()
 {
 	srand(time(NULL));
+	fstream m1("m1.txt");
+	fstream m2("m2.txt"); 
+
 	element** a;
 	a = new element*[5];
 	for (int i = 0;i < 5; i++)
@@ -194,18 +192,39 @@ int main()
 				a[i][j] = rand();
 		}
 	}
-	matrix b(5, 5, a);
+
+	matrix b(5, 5, a);	
 	cout << "prost" << endl << b;
+	m1 << b;
+
 	b = b + b;
 	cout << "plus" << endl << b;
+
 	b = b | b;
 	cout << "prisoed" << endl << b;
+
 	b = b.povorot();
 	cout << "povorot" << endl << b;
-	cout << "enter new matrix" << endl;
-	matrix c(3, 3);
-	cin >> c;
-	cout << "c" << endl << c;
+
+	matrix c(5, 5);
+	m2 >> c;
+	cout << "from file" << endl << c;
+
+	cout << "enter new matrix 2x2" << endl;
+	matrix d(2, 2);
+	cin >> d;
+	cout << "new d" << endl << d;
+
+	try
+	{
+		c = c + d;
+		cout << b;
+	}
+	catch (char*& a)
+	{
+		cout << "iskluch " << a << endl;
+	}
+
 	system("pause");
     return 0;
 }
