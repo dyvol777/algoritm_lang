@@ -1,4 +1,4 @@
-// lab 4.cpp: ���������� ����� ����� ��� ����������� ����������.
+// lab 4.cpp: îïðåäåëÿåò òî÷êó âõîäà äëÿ êîíñîëüíîãî ïðèëîæåíèÿ.
 //
 
 
@@ -45,7 +45,7 @@ istream& operator >> (istream& in, element& a)
 {
 	string el;
 	in >> el;
-	stringstream ss;
+	stringstream ss; // зачем так извращаться?
 	ss << el;
 	ss >> a.data;
 	return in;
@@ -78,20 +78,20 @@ public:
 		stroki = s1;
 		stolbcu = s2;
 	}
-	element poluch(int c, int b)
+	element poluch(int c, int b) // хорошо бы оператор
 	{
 
 		return a[c][b];
 	}
-	void vstav(int c, int b, element d)
+	void vstav(int c, int b, element d) // хорошо бы оператор
 	{
 		a[c][b] = d;
 		return;
 	}
-	matrix operator+(const matrix& s)
+	matrix operator+(const matrix& s) // const method
 	{
 		if ((stolbcu != s.stolbcu) || (stroki != s.stroki))
-		throw "ne ravn razmer";
+		throw "ne ravn razmer"; // хорошо бы класс исключений
 		matrix q(stroki, stolbcu);
 		for (int i = 0;i < stroki; i++)
 		{
@@ -102,10 +102,10 @@ public:
 		}
 		return q;
 	}
-	matrix operator|(const matrix& s)
+	matrix operator|(const matrix& s) // const
 	{
 		matrix q(stroki, (stolbcu+s.stolbcu));
-		for (int i = 0;i < stroki; i++)
+		for (int i = 0;i < stroki; i++) // uint (и везде)
 		{
 			for (int j = 0;j < (stolbcu + s.stolbcu); j++)
 			{
@@ -130,6 +130,7 @@ public:
 		}
 		return q;
 	}
+	// раскомментировать бы
 	/*~matrix()
 	{
 		for (int i = 0;i < stolbcu; i++)
@@ -156,6 +157,7 @@ ostream& operator << (ostream& out, matrix const& a)
 }
 istream& operator >> (istream& in, matrix& a)
 {
+	// откуда известен размер матрицы?
 	string el;
 	//in >> el;
 	//stringstream ss;
@@ -165,7 +167,7 @@ istream& operator >> (istream& in, matrix& a)
 		for (int j = 0;j < a.stolbcu; j++)
 		{
 			in >> el;
-			stringstream ss;
+			stringstream ss; // зачем?
 			ss << el;
 			ss >> a.a[i][j];
 		}
@@ -180,7 +182,7 @@ int main()
 	fstream m2("m2.txt"); 
 
 	element** a;
-	a = new element*[5];
+	a = new element*[5]; // где delete[] ?
 	for (int i = 0;i < 5; i++)
 	{
 		a[i] = new element[5];
@@ -220,10 +222,11 @@ int main()
 		c = c + d;
 		cout << b;
 	}
-	catch (char*& a)
+	catch (char*& a) // const
 	{
 		cout << "iskluch " << a << endl;
 	}
+	//  советовал бы все обернуть в try-catch
 
 	system("pause");
     return 0;
