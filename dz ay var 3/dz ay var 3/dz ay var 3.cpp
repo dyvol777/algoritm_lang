@@ -1,6 +1,6 @@
 // dz ay var 3.cpp: определяет точку входа для консольного приложения.
 //
-//несколько ставок, объединение, сохранение и восстановление
+//несколько ставок
 #include "stdafx.h"
 using namespace std;
 
@@ -14,6 +14,7 @@ public:
 		name = s;
 		nakogo=q;
 	}
+	friend ofstream& operator<<(ofstream& os, const podr& p);
 	~rab()
 	{
 
@@ -34,6 +35,8 @@ public:
 		name = s;
 		pnak=q;
 	}
+	friend void obed(podr*a, podr* b);
+	friend ofstream& operator<<(ofstream& os, const podr& p);
 	void addrab(string s)
 	{
 		rab* pnew = new rab(s, this);//smartpointer?
@@ -42,6 +45,7 @@ public:
 	}
 	void addrab(rab* s)
 	{
+		s->nakogo = this;
 		s->history.push_back(this->name);
 		prab.push_back(s);
 	}
@@ -59,6 +63,7 @@ public:
 	}
 	void addpodr(podr* s)
 	{
+		s->pnak = this;
 		ppodr.push_back(s);
 	}
 	void dellpodr(string s)
@@ -147,6 +152,25 @@ private:
 	vector<rab*> prab2;//кто работает на 2 ставке
 	string name;
 };
+
+void obed(podr*a, podr* b)
+{
+	for (int i = 0;i < b->prab.size();i++)
+		a->addrab(b->prab[i]);
+	for (int i = 0;i < b->ppodr.size();i++)
+		a->addpodr(b->ppodr[i]);
+}
+
+ofstream& operator<<(ofstream& os, const podr& p)
+{
+	for (int i = 0;i < p.prab.size();i++)
+		os << "sotr " << p.prab[i]->name << ' ' << p.prab[i]->nakogo->name<<endl;
+	for (int i = 0;i < p.ppodr.size();i++)
+		os << "podr " << p.ppodr[i]->name << ' ' << p.ppodr[i]->pnak->name<<endl;
+	for (int i = 0;i < p.ppodr.size();i++)
+		os << *p.ppodr[i];
+	return os;
+}
 
 int main()
 {
@@ -246,8 +270,12 @@ int main()
 					{
 						podr* k;
 						k = komp.searchpodr(value2);
-						komp.searchpodr(value2)->gethos()->dellpodr(value2);
-						komp.searchpodr(value3)->addpodr(k);
+						if (k->searchpodr(value3) == 0)
+						{
+							komp.searchpodr(value2)->gethos()->dellpodr(value2);
+							komp.searchpodr(value3)->addpodr(k);
+						}
+						else cout << "nevozmoshno";
 					}
 					else cout << "net takogo podr";
 				}
@@ -255,16 +283,35 @@ int main()
 			}
 			if ((value1 != "sotr") && (value1 != "podr")) cout << "not right command" << endl;
 		}
-
-		//if (data == "obed")
-		//{
-		//	m = 1;
-		//	cin >> value1;
-		//	cin >> value2;//защита
-		//	obed(komp.searchpodr(value1), komp.searchpodr(value2));//написать функцию объединения 2 классов в 1 
-		//хз как потому что нет инета(сложение векторов?)
-		//}
-
+		if (data == "obed")
+		{
+			m = 1;
+			cin >> value1;
+			if (komp.searchpodr(value1) != 0)
+			{
+				cin >> value2;
+				if (komp.searchpodr(value2) != 0)
+				{
+					if (komp.searchpodr(value1)->searchpodr(value2) != 0)
+					{
+						obed(komp.searchpodr(value1), komp.searchpodr(value2));
+						komp.searchpodr(value2)->gethos()->dellpodr(value2);
+					}
+					if (komp.searchpodr(value2)->searchpodr(value1) != 0)
+					{
+						obed(komp.searchpodr(value2), komp.searchpodr(value1));
+						komp.searchpodr(value1)->gethos()->dellpodr(value1);
+					}
+					if ((komp.searchpodr(value1)->searchpodr(value2) == 0) && (komp.searchpodr(value2)->searchpodr(value1) == 0))
+					{
+						obed(komp.searchpodr(value2), komp.searchpodr(value1));
+						komp.searchpodr(value1)->gethos()->dellpodr(value1);
+					}
+				}
+				else cout << "ne takogo";
+			}
+			else cout << "ne takogo";
+		}
 		if (data == "search")
 		{
 			m = 1;
@@ -272,6 +319,43 @@ int main()
 			if (komp.searchrab(value1) != 0)
 				komp.searchrab(value1)->printrab(value1);
 			else cout << "takogo net";
+		}
+		if (data == "save")
+		{
+			m = 1;
+			ofstream fout;
+			fout.open("data.txt");
+			fout << komp;
+
+			fout.close();
+		}
+		if (data == "open")
+		{
+			m = 1;
+			ifstream fin;
+			fin.open("data.txt");
+			podr q("company", 0);
+			komp = q;
+			while (!fin.eof())
+			{
+				fin >> value1;
+				fin >> value2;
+				fin >> value3;
+				if (value1 == "sotr")
+				{
+					komp.searchpodr(value3)->addrab(value2);
+				}
+				if (value1 == "podr")
+				{
+					komp.searchpodr(value3)->addpodr(value2);
+				}
+			}//прикрутить на дубл в конце
+
+			if (value1 == "sotr")
+				komp.searchrab(value2)->dellrab(value2);//функция поиска подразделения
+			if (value1 == "podr")
+				komp.searchpodr(value2)->gethos()->dellpodr(value2);//функция поиска подразделения
+			fin.close();
 		}
 		if (data == "exit")
 		{

@@ -1,0 +1,5 @@
+sotr s1 company
+podr p1 company
+sotr s2 p1
+sotr s3 p1
+sotr s4 p1
