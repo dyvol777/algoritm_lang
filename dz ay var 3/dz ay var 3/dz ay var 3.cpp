@@ -14,6 +14,17 @@ public:
 		name = s;
 		nakogo=q;
 	}
+	void add2(string a)
+	{
+		nakogo2.push_back(a);
+	}
+	void dell2(string a)
+	{
+		for (int i = 0; i < nakogo2.size();i++)
+		{
+			if (nakogo2[i] == a) nakogo2.erase(nakogo2.begin() + i);
+		}
+	}
 	friend ofstream& operator<<(ofstream& os, const podr& p);
 	~rab()
 	{
@@ -22,7 +33,7 @@ public:
 private:
 	string name;
 	podr* nakogo;
-	vector<podr*> nakogo2;//2 ставка. но если удаляют с главной то и сэтой удаляется
+	vector<string> nakogo2;//2 ставка. но если удаляют с главной то и сэтой удаляется
 	vector<string> history;
 };
 
@@ -133,6 +144,10 @@ public:
 				for (int i = 0;i<k->history.size();i++)
 					cout << k->history[i] << ' ';
 				cout << endl;
+				cout << "podrabatuvaet na: ";
+				for (int i = 0;i<k->nakogo2.size();i++)
+					cout << k->nakogo2[i] << ' ';
+				cout << endl;
 			}
 		}
 	}
@@ -149,7 +164,6 @@ private:
 	vector<podr*> ppodr;//кем управляют
 	podr* pnak;//на кого работают
 	vector<rab*> prab;//кто у них работатет
-	vector<rab*> prab2;//кто работает на 2 ставке
 	string name;
 };
 
@@ -360,6 +374,36 @@ int main()
 		if (data == "exit")
 		{
 			m = 1;
+		}
+		if (data == "add2")
+		{
+			m = 1;
+			cin >> value1;
+			if (komp.searchrab(value1) != 0)
+			{
+				cin >> value2;
+				if (komp.searchpodr(value2) != 0)
+				{
+					komp.searchrab(value1)->gettrab(value1)->add2(value2);
+				}
+				else cout << "net takogo podr";
+			}
+			else cout << "net takogo rab";
+		}
+		if (data == "dell2")
+		{
+			m = 1;
+			cin >> value1;
+			if (komp.searchrab(value1) != 0)
+			{
+				cin >> value2;
+				if (komp.searchpodr(value2) != 0)
+				{
+					komp.searchrab(value1)->gettrab(value1)->dell2(value2);
+				}
+				else cout << "net takogo podr";
+			}
+			else cout << "net takogo rab";
 		}
 		if (m == 0) cout << "not right command" << endl;
 		m = 0;

@@ -1,15 +1,17 @@
 ﻿  dz ay var 3.cpp
-c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(54): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(71): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(78): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(93): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(109): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(112): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(133): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(158): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(160): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(166): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(168): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(170): warning C4018: <: несоответствие типов со знаком и без знака
-c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(146): warning C4715: podr::gettrab: значение возвращается не при всех путях выполнения
+c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(23): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(65): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(82): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(89): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(104): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(120): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(123): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(144): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(148): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(172): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(174): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(180): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(182): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(184): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\sergey\documents\visual studio 2015\projects\dz ay var 3\dz ay var 3\dz ay var 3.cpp(161): warning C4715: podr::gettrab: значение возвращается не при всех путях выполнения
   dz ay var 3.vcxproj -> C:\Users\Sergey\documents\visual studio 2015\Projects\dz ay var 3\Debug\dz ay var 3.exe
