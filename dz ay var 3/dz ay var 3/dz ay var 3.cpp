@@ -28,7 +28,8 @@ public:
 	friend ofstream& operator<<(ofstream& os, const podr& p);
 	~rab()
 	{
-
+		nakogo2.clear();
+		history.clear();
 	}
 private:
 	string name;
@@ -50,7 +51,7 @@ public:
 	friend ofstream& operator<<(ofstream& os, const podr& p);
 	void addrab(string s)
 	{
-		rab* pnew = new rab(s, this);//smartpointer?
+		rab* pnew = new rab(s, this);
 		pnew->history.push_back(this->name);
 		prab.push_back(pnew);
 	}
@@ -159,7 +160,11 @@ public:
 				return k;
 		}
 	}
-	//~podr();
+	~podr()
+	{
+		ppodr.clear();
+		prab.clear();
+	}
 private:
 	vector<podr*> ppodr;//кем управл€ют
 	podr* pnak;//на кого работают
