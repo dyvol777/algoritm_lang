@@ -65,7 +65,11 @@ public:
 	{
 		for (int i = 0; i < prab.size();i++)
 		{
-			if (prab[i]->name == s) prab.erase(prab.begin() + i);
+			if (prab[i]->name == s)
+			{
+				delete prab[i];
+				prab.erase(prab.begin() + i);
+			}
 		}
 	}
 	void addpodr(string s)
@@ -82,7 +86,11 @@ public:
 	{
 		for (int i = 0; i < ppodr.size();i++)
 		{
-			if (ppodr[i]->name == s) ppodr.erase(ppodr.begin() + i);
+			if (ppodr[i]->name == s)
+			{
+				delete ppodr[i];
+				ppodr.erase(ppodr.begin() + i);
+			}
 		}
 	}
 	podr* searchrab(string name) 
@@ -162,7 +170,15 @@ public:
 	}
 	~podr()
 	{
+		for (int i = 0; i < ppodr.size();i++)
+		{
+			delete ppodr[i];
+		}
 		ppodr.clear();
+		for (int i = 0; i < prab.size();i++)
+		{
+			delete prab[i];
+		}
 		prab.clear();
 	}
 private:
