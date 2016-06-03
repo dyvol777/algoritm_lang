@@ -120,7 +120,7 @@ public:
 		{
 			if (k->searchpodr(name) != 0) return k->searchpodr(name);
 		}
-		throw "no podr";
+		return 0;
 	}
 	void show()
 	{
@@ -225,23 +225,23 @@ int main()
 				if (komp.searchrab(value2) == 0)
 				{
 					cin >> value3;//имя подразд
-					try
-					{
+					if (komp.searchpodr(value3)!=0)
 						komp.searchpodr(value3)->addrab(value2);//create
-					}
-					catch(string& a){cout<<a<<endl;}
+					else cout << "net podr"; 
 				}
 				else cout << "takoi sotr est";
 			}//vot tak pisat!!
 			if (value1 == "podr")
 			{
 				cin >> value2;//имя
+				if (komp.searchpodr(value2) == 0)
+				{
 					cin >> value3;//имя головного подразд
-					try 
-					{
+					if(komp.searchpodr(value3) != 0)
 						komp.searchpodr(value3)->addpodr(value2);//функция поиска подразделения
-					}
-					catch (string& a) { cout << a << endl; }
+					else cout << "net podr";
+				}
+				else cout << "takoe podr est";
 			}
 			if ((value1!="sotr")&&(value1!="podr")) cout << "not right command" << endl;//защита от неправильного ввода
 		}
@@ -266,11 +266,11 @@ int main()
 			if (value1 == "podr")
 			{
 				cin >> value2;//имя
-				try
+				if (komp.searchpodr(value2) != 0)
 				{
 					komp.searchpodr(value2)->gethos()->dellpodr(value2);//функция поиска подразделения
 				}		
-				catch (string& a) { cout << a << endl; }
+				else cout << "takogo podr net";
 			}
 			if ((value1 != "sotr") && (value1 != "podr")) cout << "not right command" << endl;
 		}
@@ -284,31 +284,37 @@ int main()
 				if (komp.searchrab(value2) != 0)
 				{
 					cin >> value3;//имя подразд
-					try
+					if (komp.searchpodr(value3) != 0)
 					{
 						rab* k;
 						k = komp.searchrab(value2)->gettrab(value2);
 						komp.searchrab(value2)->dellrab(value2);
 						komp.searchpodr(value3)->addrab(k);
 					}//защита от перемещения ниже по ветке дерева?
-					catch (string& a) { cout << a << endl; }
+					else cout << "net takogo podr";
 				}
 				else cout << "takogo sotr net";
 			}
 			if (value1 == "podr")
 			{
 				cin >> value2;//имя
-				try
+				if (komp.searchpodr(value2) != 0)
 				{
 					cin >> value3;//имя подразд
-
-					podr* k;
-					k = komp.searchpodr(value2);
-
-					komp.searchpodr(value2)->gethos()->dellpodr(value2);
-					komp.searchpodr(value3)->addpodr(k);
+					if (komp.searchpodr(value3) != 0)
+					{
+						podr* k;
+						k = komp.searchpodr(value2);
+						if (k->searchpodr(value3) == 0)
+						{
+							komp.searchpodr(value2)->gethos()->dellpodr(value2);
+							komp.searchpodr(value3)->addpodr(k);
+						}
+						else cout << "nevozmoshno";
+					}
+					else cout << "net takogo podr";
 				}
-				catch (string& a) { cout << a << endl; }
+				else cout << "net takogo podr";
 			}
 			if ((value1 != "sotr") && (value1 != "podr")) cout << "not right command" << endl;
 		}
@@ -316,13 +322,30 @@ int main()
 		{
 			m = 1;
 			cin >> value1;
-			cin >> value2;
-			try 
+			if (komp.searchpodr(value1) != 0)
 			{
-				obed(komp.searchpodr(value1), komp.searchpodr(value2));
-				komp.searchpodr(value2)->gethos()->dellpodr(value2);
+				cin >> value2;
+				if (komp.searchpodr(value2) != 0)
+				{
+					if (komp.searchpodr(value1)->searchpodr(value2) != 0)
+					{
+						obed(komp.searchpodr(value1), komp.searchpodr(value2));
+						komp.searchpodr(value2)->gethos()->dellpodr(value2);
+					}
+					if (komp.searchpodr(value2)->searchpodr(value1) != 0)
+					{
+						obed(komp.searchpodr(value2), komp.searchpodr(value1));
+						komp.searchpodr(value1)->gethos()->dellpodr(value1);
+					}
+					if ((komp.searchpodr(value1)->searchpodr(value2) == 0) && (komp.searchpodr(value2)->searchpodr(value1) == 0))
+					{
+						obed(komp.searchpodr(value2), komp.searchpodr(value1));
+						komp.searchpodr(value1)->gethos()->dellpodr(value1);
+					}
+				}
+				else cout << "ne takogo";
 			}
-			catch (string& a) { cout << a << endl; }
+			else cout << "ne takogo";
 		}
 		if (data == "search")
 		{
@@ -380,7 +403,7 @@ int main()
 			if (komp.searchrab(value1) != 0)
 			{
 				cin >> value2;
-				if (komp.searchpodr(value2))
+				if (komp.searchpodr(value2) != 0)
 				{
 					komp.searchrab(value1)->gettrab(value1)->add2(value2);
 				}
