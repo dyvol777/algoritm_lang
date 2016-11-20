@@ -1,0 +1,6 @@
+﻿  homework-start.cpp
+c:\users\sergey\documents\visual studio 2015\projects\homework-start\homework-start\Parcer.h(39): warning C4099: tree: имя типа, ранее отображенное с помощью "class", теперь отображено с помощью "struct"
+  c:\users\sergey\documents\visual studio 2015\projects\homework-start\homework-start\Parcer.h(37): note:  см. объявление "tree"
+  AssemblyInfo.obj : /DEBUG:FASTLINK не поддерживается, если присутствует управляемый код; выполняется перезапуск компоновки с /DEBUG:FULL
+  homework-start.vcxproj -> c:\users\sergey\documents\visual studio 2015\Projects\homework-start\Debug\homework-start.exe
+  homework-start.vcxproj -> c:\users\sergey\documents\visual studio 2015\Projects\homework-start\Debug\homework-start.pdb (Partial PDB)
