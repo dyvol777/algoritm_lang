@@ -105,7 +105,6 @@ public:
 		{
 			if(k->searchrab(name)!=0) return k->searchrab(name);
 		}
-		throw "no rab";
 		return 0;
 	}
 	podr* searchpodr(string name)
@@ -121,7 +120,6 @@ public:
 		{
 			if (k->searchpodr(name) != 0) return k->searchpodr(name);
 		}
-		throw "no podr";
 		return 0;
 	}
 	void show()
@@ -216,155 +214,220 @@ int main()
 	int m = 0;
 	while (data != "exit")
 	{
-		try
+		cin >> data;
+		if (data == "add")//просто добавление
 		{
-			cin >> data;
-			if (data == "add")//просто добавление
+			m = 1;
+			cin >> value1;//что?
+			if (value1 == "sotr")
 			{
-				m = 1;
-				cin >> value1;//что?
-				if (value1 == "sotr")
+				cin >> value2;//имя
+				if (komp.searchrab(value2) == 0)
 				{
-					cin >> value2;//имя
 					cin >> value3;//имя подразд
-					komp.searchpodr(value3)->addrab(value2);//create
-				}//vot tak pisat!!
-				else if (value1 == "podr")
-				{
-					cin >> value2;//имя
-					cin >> value3;//имя головного подразд
-					komp.searchpodr(value3)->addpodr(value2);//функция поиска подразделения
+					if (komp.searchpodr(value3)!=0)
+						komp.searchpodr(value3)->addrab(value2);//create
+					else cout << "net podr"; 
 				}
-				else cout << "not right command" << endl;//защита от неправильного ввода
-			}
-			if (data == "show")
+				else cout << "takoi sotr est";
+			}//vot tak pisat!!
+			if (value1 == "podr")
 			{
-				m = 1;
-				komp.show();
-			}
-			if (data == "dell")
-			{
-				m = 1;
-				cin >> value1;
-				if (value1 == "sotr")
+				cin >> value2;//имя
+				if (komp.searchpodr(value2) == 0)
 				{
-					cin >> value2;//имя
+					cin >> value3;//имя головного подразд
+					if(komp.searchpodr(value3) != 0)
+						komp.searchpodr(value3)->addpodr(value2);//функция поиска подразделения
+					else cout << "net podr";
+				}
+				else cout << "takoe podr est";
+			}
+			if ((value1!="sotr")&&(value1!="podr")) cout << "not right command" << endl;//защита от неправильного ввода
+		}
+		if (data == "show")
+		{
+			m = 1;
+			komp.show();
+		}
+		if (data == "dell")
+		{
+			m=1;
+			cin >> value1;
+			if (value1 == "sotr")
+			{
+				cin >> value2;//имя
+				if (komp.searchrab(value2) != 0)
+				{
 					komp.searchrab(value2)->dellrab(value2);//функция поиска подразделения
 				}
-				if (value1 == "podr")
-				{
-					cin >> value2;//имя
-					komp.searchpodr(value2)->gethos()->dellpodr(value2);//функция поиска подразделения
-				}
-				if ((value1 != "sotr") && (value1 != "podr")) cout << "not right command" << endl;
+				else cout << "takogo sotr net";
 			}
-			if (data == "goto")//перевод
+			if (value1 == "podr")
 			{
-				m = 1;
-				cin >> value1;
-				if (value1 == "sotr")
+				cin >> value2;//имя
+				if (komp.searchpodr(value2) != 0)
 				{
-					cin >> value2;//имя
+					komp.searchpodr(value2)->gethos()->dellpodr(value2);//функция поиска подразделения
+				}		
+				else cout << "takogo podr net";
+			}
+			if ((value1 != "sotr") && (value1 != "podr")) cout << "not right command" << endl;
+		}
+		if (data == "goto")//перевод
+		{
+			m = 1;
+			cin >> value1;
+			if (value1 == "sotr")
+			{
+				cin >> value2;//имя
+				if (komp.searchrab(value2) != 0)
+				{
 					cin >> value3;//имя подразд
+					if (komp.searchpodr(value3) != 0)
 					{
 						rab* k;
 						k = komp.searchrab(value2)->gettrab(value2);
 						komp.searchrab(value2)->dellrab(value2);
 						komp.searchpodr(value3)->addrab(k);
 					}//защита от перемещения ниже по ветке дерева?
+					else cout << "net takogo podr";
 				}
-				if (value1 == "podr")
+				else cout << "takogo sotr net";
+			}
+			if (value1 == "podr")
+			{
+				cin >> value2;//имя
+				if (komp.searchpodr(value2) != 0)
 				{
-					cin >> value2;//имя
-
 					cin >> value3;//имя подразд
-
+					if (komp.searchpodr(value3) != 0)
 					{
 						podr* k;
 						k = komp.searchpodr(value2);
-
+						if (k->searchpodr(value3) == 0)
+						{
+							komp.searchpodr(value2)->gethos()->dellpodr(value2);
+							komp.searchpodr(value3)->addpodr(k);
+						}
+						else cout << "nevozmoshno";
+					}
+					else cout << "net takogo podr";
+				}
+				else cout << "net takogo podr";
+			}
+			if ((value1 != "sotr") && (value1 != "podr")) cout << "not right command" << endl;
+		}
+		if (data == "obed")
+		{
+			m = 1;
+			cin >> value1;
+			if (komp.searchpodr(value1) != 0)
+			{
+				cin >> value2;
+				if (komp.searchpodr(value2) != 0)
+				{
+					if (komp.searchpodr(value1)->searchpodr(value2) != 0)
+					{
+						obed(komp.searchpodr(value1), komp.searchpodr(value2));
 						komp.searchpodr(value2)->gethos()->dellpodr(value2);
-						komp.searchpodr(value3)->addpodr(k);
+					}
+					if (komp.searchpodr(value2)->searchpodr(value1) != 0)
+					{
+						obed(komp.searchpodr(value2), komp.searchpodr(value1));
+						komp.searchpodr(value1)->gethos()->dellpodr(value1);
+					}
+					if ((komp.searchpodr(value1)->searchpodr(value2) == 0) && (komp.searchpodr(value2)->searchpodr(value1) == 0))
+					{
+						obed(komp.searchpodr(value2), komp.searchpodr(value1));
+						komp.searchpodr(value1)->gethos()->dellpodr(value1);
 					}
 				}
-				if ((value1 != "sotr") && (value1 != "podr")) cout << "not right command" << endl;
+				else cout << "ne takogo";
 			}
-			if (data == "obed")
-			{
-				m = 1;
-				cin >> value1;
-				cin >> value2;
-				obed(komp.searchpodr(value1), komp.searchpodr(value2));
-				komp.searchpodr(value2)->gethos()->dellpodr(value2);
-			}
-			if (data == "search")
-			{
-				m = 1;
-				cin >> value1;
-				komp.searchrab(value1)->printrab(value1);
-			}
-			if (data == "save")
-			{
-				m = 1;
-				ofstream fout;
-				fout.open("data.txt");
-				fout << komp;
-
-				fout.close();
-			}
-			if (data == "open")
-			{
-				m = 1;
-				ifstream fin;
-				fin.open("data.txt");
-				podr q("company", 0);
-				komp = q;
-				while (!fin.eof())
-				{
-					fin >> value1;
-					fin >> value2;
-					fin >> value3;
-					if (value1 == "sotr")
-					{
-						komp.searchpodr(value3)->addrab(value2);
-					}
-					if (value1 == "podr")
-					{
-						komp.searchpodr(value3)->addpodr(value2);
-					}
-				}//прикрутить на дубл в конце
-
-				if (value1 == "sotr")
-					komp.searchrab(value2)->dellrab(value2);//функция поиска подразделения
-				if (value1 == "podr")
-					komp.searchpodr(value2)->gethos()->dellpodr(value2);//функция поиска подразделения
-				fin.close();
-			}
-			if (data == "exit")
-			{
-				m = 1;
-			}
-			if (data == "add2")
-			{
-				m = 1;
-				cin >> value1;
-				cin >> value2;
-				komp.searchrab(value1)->gettrab(value1)->add2(value2);
-			}
-			if (data == "dell2")
-			{
-				m = 1;
-				cin >> value1;
-				cin >> value2;
-				komp.searchrab(value1)->gettrab(value1)->dell2(value2);
-			}
-			if (m == 0) cout << "not right command" << endl;
-			m = 0;
+			else cout << "ne takogo";
 		}
-		catch (string& a)
+		if (data == "search")
 		{
-			cout << "error: " << a;
+			m = 1;
+			cin >> value1;
+			if (komp.searchrab(value1) != 0)
+				komp.searchrab(value1)->printrab(value1);
+			else cout << "takogo net";
 		}
+		if (data == "save")
+		{
+			m = 1;
+			ofstream fout;
+			fout.open("data.txt");
+			fout << komp;
+
+			fout.close();
+		}
+		if (data == "open")
+		{
+			m = 1;
+			ifstream fin;
+			fin.open("data.txt");
+			podr q("company", 0);
+			komp = q;
+			while (!fin.eof())
+			{
+				fin >> value1;
+				fin >> value2;
+				fin >> value3;
+				if (value1 == "sotr")
+				{
+					komp.searchpodr(value3)->addrab(value2);
+				}
+				if (value1 == "podr")
+				{
+					komp.searchpodr(value3)->addpodr(value2);
+				}
+			}//прикрутить на дубл в конце
+
+			if (value1 == "sotr")
+				komp.searchrab(value2)->dellrab(value2);//функция поиска подразделения
+			if (value1 == "podr")
+				komp.searchpodr(value2)->gethos()->dellpodr(value2);//функция поиска подразделения
+			fin.close();
+		}
+		if (data == "exit")
+		{
+			m = 1;
+		}
+		if (data == "add2")
+		{
+			m = 1;
+			cin >> value1;
+			if (komp.searchrab(value1) != 0)
+			{
+				cin >> value2;
+				if (komp.searchpodr(value2) != 0)
+				{
+					komp.searchrab(value1)->gettrab(value1)->add2(value2);
+				}
+				else cout << "net takogo podr";
+			}
+			else cout << "net takogo rab";
+		}
+		if (data == "dell2")
+		{
+			m = 1;
+			cin >> value1;
+			if (komp.searchrab(value1) != 0)
+			{
+				cin >> value2;
+				if (komp.searchpodr(value2) != 0)
+				{
+					komp.searchrab(value1)->gettrab(value1)->dell2(value2);
+				}
+				else cout << "net takogo podr";
+			}
+			else cout << "net takogo rab";
+		}
+		if (m == 0) cout << "not right command" << endl;
+		m = 0;
 	}
 	return 0;
 }
